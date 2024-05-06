@@ -2,7 +2,7 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 import {colors} from "../../Shared/constant/colors";
 import CustomTextIput from "../../Shared/components/CustomTextIput";
 
-function LoginScreen() {
+function LoginScreen({navigation}) {
     return (
         <View style={{
             justifyContent: 'center',
@@ -22,7 +22,9 @@ function LoginScreen() {
             <CustomTextIput style={{width: 300, }}
             placeholder={'Password'}>
             </CustomTextIput>
-           <TouchableOpacity style={{marginTop:40,backgroundColor:colors.primary,borderStyle:'solid',borderRadius:10,padding:10,width:200,justifyContent:'center',alignItems:'center'}}>
+           <TouchableOpacity
+               onPress={() => navigation.navigate('Home')}
+               style={{marginTop:40,backgroundColor:colors.primary,borderStyle:'solid',borderRadius:10,padding:10,width:200,justifyContent:'center',alignItems:'center'}}>
                <Text style={{fontWeight:'bold',color:colors.background}}>Login</Text>
            </TouchableOpacity>
         </View>

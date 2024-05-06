@@ -2,7 +2,7 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 import {colors} from "../../Shared/constant/colors";
 import CustomTextIput from "../../Shared/components/CustomTextIput";
 
-function RegisterScreen() {
+function RegisterScreen({navigation}) {
 
     return (
         <View style={{
@@ -23,16 +23,18 @@ function RegisterScreen() {
             <CustomTextIput style={{width: 300,}}
                             placeholder={'Password'}>
             </CustomTextIput>
-            <TouchableOpacity style={{
-                marginTop: 40,
-                backgroundColor: colors.primary,
-                borderStyle: 'solid',
-                borderRadius: 10,
-                padding: 10,
-                width: 200,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Otp')}
+                style={{
+                    marginTop: 40,
+                    backgroundColor: colors.primary,
+                    borderStyle: 'solid',
+                    borderRadius: 10,
+                    padding: 10,
+                    width: 200,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                 <Text style={{fontWeight: 'bold', color: colors.background}}>Register</Text>
             </TouchableOpacity>
         </View>
