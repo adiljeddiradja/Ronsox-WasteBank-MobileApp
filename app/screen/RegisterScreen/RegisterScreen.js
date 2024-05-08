@@ -1,4 +1,4 @@
-import {Alert, Button, Image, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Alert, Image, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {
     AntDesign,
     Fontisto,
@@ -11,17 +11,19 @@ import {
 import {colors} from "../../Shared/constant/colors";
 import {useState} from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AuthServices from "../../services/AuthServices";
 
-function RegisterScreen({}) {
+function RegisterScreen({navigation}) {
+    const authService = AuthServices()
     const [formData, setFormData] = useState({
         username: '',
         password: '',
         name: '',
         email: '',
-        phone: '',
-        ktp: '',
+        mobilePhoneNo: '',
+        ktpNumber: '',
         address: '',
-        birthday: '',
+        birthDate: '',
     });
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -34,12 +36,12 @@ function RegisterScreen({}) {
     };
 
     const handleConfirm = (date) => {
-        // Format tanggal menjadi string (misal: "2024-05-07")
+
         const formattedDate = date.toISOString().split('T')[0];
-        // Simpan tanggal ke dalam state formData
+
         setFormData({
             ...formData,
-            birthday: formattedDate
+            birthDate: formattedDate
         });
         hideDatePicker();
     };
@@ -51,12 +53,17 @@ function RegisterScreen({}) {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        try {
+            const result = await authService.register(formData);
+            console.log(result)
+            console.log("Registrasi berhasil:", result);
+            navigation.navigate("Otp", {email: formData.email});
+        } catch (error) {
 
-        const message = `Username: ${formData.username}\nPassword: ${formData.password}\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nktp: ${formData.ktp}\nAddress: ${formData.address}\nBirthday: ${formData.birthday}`;
-
-
-        Alert.alert('Data yang dimasukkan:', message);
+            console.error("Registrasi gagal:", error.message);
+            Alert.alert("Registrasi Gagal", error.message);
+        }
     };
     return (
       <ScrollView
@@ -169,7 +176,7 @@ function RegisterScreen({}) {
                  }}>
                  <AntDesign name="mobile1" size={15} color="black" />
                  <TextInput
-                     onChangeText={(text)=>handleInputChange('phone', text)}
+                     onChangeText={(text)=>handleInputChange('mobilePhoneNo', text)}
                      placeholder="No telepon"
                      keyboardType="default"
                      style={{marginStart: 10, flex: 1}}
@@ -189,7 +196,7 @@ function RegisterScreen({}) {
                  }}>
                  <MaterialCommunityIcons name="card-account-details-outline" size={15} color="black" />
                  <TextInput
-                     onChangeText={(text)=>handleInputChange('ktp', text)}
+                     onChangeText={(text)=>handleInputChange('ktpNumber', text)}
                      placeholder="Nomor KTP"
                      keyboardType="default"
                      style={{marginStart: 10, flex: 1}}

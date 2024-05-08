@@ -42,7 +42,7 @@ function HomeScreen({}) {
                     <View style={{
                         padding: 10,
                     }}>
-                        <Text style={{fontSize: 24, fontWeight: 'bold', color: colors.secondary}}>Rp. 0</Text>
+                        <Text style={{fontSize: 24, fontWeight: 'bold', color: colors.secondary}}>Rp. 80.000.000,00</Text>
                     </View>
                     <View style={{borderTopColor: colors.primary, borderTopWidth: 1,}}>
                         <Text style={{fontSize: 16, fontWeight: 'bold', color: colors.secondary, marginTop: 10}}>Total

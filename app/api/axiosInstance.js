@@ -3,7 +3,7 @@ import LocalStorage from '../utils/LocalStorage';
 import { GlobalError, UnauthorizedError } from '../utils/Error';
 
 const axiosInstance = axios.create({
-    baseURL: "http://10.10.102.38:8080"
+    baseURL: "http://10.10.102.97:8080"
 });
 
 axiosInstance.interceptors.request.use(
